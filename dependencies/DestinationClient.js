@@ -10,27 +10,25 @@ export default class DestinationClient {
         const dest = join(resolve(), 'dest');
         if (!existsSync(dest))
             mkdirSync(dest);
-        if (!existsSync(join(dest, bucket.lvl1)))
-            mkdirSync(join(dest, bucket.lvl1));
-        if (!existsSync(join(dest, bucket.lvl1, bucket.lvl2)))
-            mkdirSync(join(dest, bucket.lvl1, bucket.lvl2));
-        const path = `${join(dest, bucket.lvl1, bucket.lvl2)}/${key}`;
-        writeFileSync(path, this.#unitSerializer.toPayload(data));
+        if (!existsSync(join(dest, bucket)))
+            mkdirSync(join(dest, bucket));
+        const path = join(dest, bucket, key);
+        writeFileSync(path, data);
         const date = new Date().toISOString();
-        console.log(`Publish to ${bucket.lvl1}/${bucket.lvl2} at ${date}`);
+        console.log(`Publish to ${bucket}/${key} at ${date}`);
     };
 
     writeToDestination(filtered) {
-        const bucket = {
-            lvl1: filtered[0][0].params[1],
-            lvl2: filtered[0][0].params[2]
-        };
-        const field = filtered[0][0].field;
-        const uuid = crypto.randomBytes(10).toString('hex');
-        const date = new Date().toISOString();
-        const key = `${field}_${uuid}_${date}`;
-        const payload = filtered.map(u => this.#unitSerializer.toPayload(u));
-        this.#publishClient(bucket, key, payload);
+        for (const f of filtered) {
+            const field = f[0].field;
+            const uuid = crypto.randomBytes(10).toString('hex');
+            const date = new Date().toISOString();
+            const key = `${field}_${uuid}_${date}`;
+            const payload = f
+                .map(u => this.#unitSerializer.toPayload(u))
+                .join('\n');
+            this.#publishClient(field, key, payload);
+        }
     }
 
 }
