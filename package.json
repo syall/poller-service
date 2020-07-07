@@ -3,15 +3,22 @@
   "version": "1.0.0",
   "type": "module",
   "main": "build.js",
+  "description": "An extendable Node.js poller service, from reading sources to writing data to destination.",
   "scripts": {
     "start": "node build.js",
     "clean": "rm -rf dest/"
   },
-  "license": "MIT",
-  "description": "An extendable Node.js poller service, from reading sources to writing data to destination.",
-  "repository": "https://github.com/syall/poller-service",
-  "author": "Steven Yuan (syall)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/syall/poller-service.git"
+  },
+  "author": {
+    "name": "Steven Yuan",
+    "email": "s.yuan.all@gmail.com",
+    "url": "https://portfolio.syall.work"
+  },
   "engines": {
     "node": ">=13.0.0"
-  }
+  },
+  "license": "MIT"
 }
