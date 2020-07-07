@@ -10,5 +10,8 @@
   "license": "MIT",
   "description": "An extendable Node.js poller service, from reading sources to writing data to destination.",
   "repository": "https://github.com/syall/poller-service",
-  "author": "Steven Yuan (syall)"
+  "author": "Steven Yuan (syall)",
+  "engines": {
+    "node": ">=13.0.0"
+  }
 }
