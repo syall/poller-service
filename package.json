@@ -1,0 +1,14 @@
+{
+  "name": "pangolin",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "build.js",
+  "scripts": {
+    "start": "node build.js",
+    "clean": "rm -rf dest/"
+  },
+  "license": "MIT",
+  "description": "An extendable Node.js poller service, from reading sources to writing data to destination.",
+  "repository": "https://github.com/syall/poller-service",
+  "author": "Steven Yuan (syall)"
+}
