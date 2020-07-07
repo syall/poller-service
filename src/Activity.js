@@ -15,7 +15,9 @@ export default class Activity {
         units.sort((u1, u2) => u1[0].localeCompare(u2[0]));
         const [fields, groups] = this.#subfolderGrouper.group(units);
         const calls = this.#subfolderServicer.call(fields, groups);
-        const filtered = calls.filter(u => !(u[1] === 'Active' && u[2] === 25));
+        const filtered = calls.map(g =>
+            g.filter(c => !(c.params[1] === 'Active' && c.params[2] === 25))
+        );
         this.#destinationClient.writeToDestination(filtered);
     }
 
