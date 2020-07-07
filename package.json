@@ -1,5 +1,5 @@
 {
-  "name": "pangolin",
+  "name": "poller-service",
   "version": "1.0.0",
   "type": "module",
   "main": "build.js",
