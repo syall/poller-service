@@ -4,12 +4,11 @@ export default class SubfolderServicer {
 
     #service = new Service();
 
-    call(fields, groups) {
+    call(groups) {
         const calls = [];
-        for (let i = 0; i < fields.length && i < groups.length; i++) {
+        for (let i = 0; i < groups.length; i++) {
             const group = groups[i];
-            const field = fields[i];
-            const subcalls = group.map(u => this.#service.call(field, u));
+            const subcalls = group.map(u => this.#service.call(u));
             calls.push(subcalls);
         }
         return calls;

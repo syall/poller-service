@@ -1,5 +1,7 @@
-import SourceClient from './config/SourceClient.js';
+import SourceClient from './config/Sourcer.js';
+import dotenv from 'dotenv';
 
 (function main() {
-    const sourceClient = new SourceClient().start();
+    dotenv.config({ path: './config/.env' });
+    new SourceClient().start();
 })();

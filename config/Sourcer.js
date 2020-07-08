@@ -1,28 +1,31 @@
 import Activity from '../src/Activity.js';
 
-export default class SourceClient {
+export default class Sourcer {
 
-    #sourceName = 'sqs';
-    #deadName = 'dlq';
+    #sourceName = process.env.SOURCE_NAME;
+    #deadName = process.env.DEAD_NAME;
 
     #server = null;
-    #interval = 2_000;
+    #interval = process.env.INTERVAL;
     #pollClient = () => {
 
         const stat = `Polling ${this.#sourceName}, Backup ${this.#deadName}`;
         console.log(`${stat}: ${new Date().toISOString()}`);
 
         const fields = [];
-        const numFields = 16;
-        for (let i = 0; i < numFields; i++) fields.push(
+        const fieldCount = process.env.FIELD_COUNT;
+        for (let i = 0; i < fieldCount; i++) fields.push(
             // https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
             Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 16)
         );
 
+        const separator = ',';
+        const delimiter = '|';
+        const numFields = process.env.NUM_FIELDS;
+
         // u = a,b,c
         const createUnit = () => {
-            const separator = ',';
-            let unitFields = 3;
+            let unitFields = numFields;
             // https://stackoverflow.com/questions/19269545/how-to-get-a-number-of-random-elements-from-an-array
             const result = new Array(unitFields);
             let len = fields.length;
@@ -38,7 +41,6 @@ export default class SourceClient {
 
         // m = a,b,c|d,e,f|g,h,i
         const createMessage = () => {
-            const delimiter = '|';
             const result = [];
             const numUnits = Math.floor(Math.random() * 10) + 4;
             for (let i = 0; i < numUnits; i++)

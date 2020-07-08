@@ -20,5 +20,8 @@
   "engines": {
     "node": ">=13.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
 }

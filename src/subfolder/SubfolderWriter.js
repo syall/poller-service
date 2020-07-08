@@ -3,11 +3,11 @@ import * as crypto from 'crypto';
 import { join, resolve } from 'path';
 import { writeFileSync, existsSync, mkdirSync } from 'fs';
 
-export default class DestinationClient {
+export default class SubfolderWriter {
 
     #unitSerializer = new UnitSerializer();
     #publishClient = (bucket, key, data) => {
-        const dest = join(resolve(), 'dest');
+        const dest = join(resolve(), process.env.DEST);
         if (!existsSync(dest))
             mkdirSync(dest);
         if (!existsSync(join(dest, bucket)))
