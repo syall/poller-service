@@ -1,4 +1,4 @@
-import Activity from '../src/Activity.js';
+import Activity from '../src/activity/Activity.js';
 
 export default class Sourcer {
 
@@ -70,7 +70,6 @@ export default class Sourcer {
         serverAction();
         this.#server = setInterval(serverAction, this.#interval);
         process.on('exit', this.stop);
-        return this;
     }
 
     stop() {

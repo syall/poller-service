@@ -1,4 +1,4 @@
-import UnitSerializer from '../dependencies/UnitSerializer.js';
+import UnitSerializer from '../utils/UnitSerializer.js';
 import * as crypto from 'crypto';
 import { join, resolve } from 'path';
 import { writeFileSync, existsSync, mkdirSync } from 'fs';
